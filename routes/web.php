@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+
+Route::group(['prefix' => 'weather', 'namespace' => 'Weather'], function(){
+    Route::get('weather-ajax', 'WeatherController@weather')->name('weather-ajax');
+  });

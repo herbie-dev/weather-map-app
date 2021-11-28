@@ -40,7 +40,7 @@
           $('#btnweather').removeAttr("disabled")
           var lat = location.lat();
           var longit = location.lng();
-          var apiKey = "73d912b5e150eba0a6334a3ebaeed7ce";
+
           var activeInfoWindow;
 
           if (!marker || !marker.setPosition) {
@@ -57,10 +57,26 @@
               infowindow.close();
           }
 
+          $.ajax({
+            type: 'GET',
+            url: '{{ route('weather-ajax', app()->getLocale()) }}',
+            dataType: "json",
+            data: { lat : lat,
+                    longit : longit
+
+             },
+
+            success: function(data){
+              if (infowindow) {
+                infowindow.close();
+              }
                 infowindow = new google.maps.InfoWindow();
-                infowindow.setContent('Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng());
+                infowindow.setContent('Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng() + '<br>Country: ' + data.sys.country + '<br>City: ' + data.name  + '<br>Weather : ' + data.weather[0].description  + '<br>Temperature :' + Math.round(data.main.temp - 273.15) + " °C");
                 infowindow.open(map, marker);
 
+            }
+
+          });
       }
 
 

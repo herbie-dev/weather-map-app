@@ -53,7 +53,10 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
-
+    /*OPEN WEATHER MAP API KEY*/
+    'weather_key' => env('APP_WEATHER', '73d912b5e150eba0a6334a3ebaeed7ce'),
+    /*GOOGLE MAPS API API KEY*/
+    'google_key' => env('APP_GOOGLE', 'AIzaSyBy5reV5QpkPAx7oUZYZDWXNzOj12ybWVE'),
     'asset_url' => env('ASSET_URL', null),
 
     /*
